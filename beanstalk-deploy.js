@@ -269,6 +269,11 @@ function main() {
         awsApiRequest.secretKey = strip(process.env.INPUT_AWS_SECRET_KEY);
         awsApiRequest.sessionToken = strip(process.env.INPUT_AWS_SESSION_TOKEN);
         awsApiRequest.region = strip(process.env.INPUT_REGION);
+        
+        // Use credentials created by https://github.com/aws-actions/configure-aws-credentials
+        awsApiRequest.accessKey    = awsApiRequest.accessKey    || strip(process.env.AWS_ACCESS_KEY_ID);
+        awsApiRequest.secretKey    = awsApiRequest.secretKey    || strip(process.env.AWS_SECRET_ACCESS_KEY);
+        awsApiRequest.sessionToken = awsApiRequest.sessionToken || strip(process.env.AWS_SESSION_TOKEN);
 
         if (process.env.INPUT_EXISTING_BUCKET_NAME) {
             existingBucketName = strip(process.env.INPUT_EXISTING_BUCKET_NAME);
